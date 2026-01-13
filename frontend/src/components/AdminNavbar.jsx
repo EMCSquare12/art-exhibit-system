@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FatachometerAlt, FaImages, FaQrcode, FaSignOutAlt, FaUserShield } from 'react-icons/fa';
+import { FaTachometerAlt, FaImages, FaQrcode, FaSignOutAlt, FaUserShield } from 'react-icons/fa';
 
 const AdminNavbar = () => {
   const { logout, user } = useAuth();
@@ -21,7 +21,7 @@ const AdminNavbar = () => {
 
         <nav className="flex items-center gap-6 text-sm font-medium">
           <Link to="/admin" className="flex items-center gap-2 hover:text-blue-400 transition">
-            <FatachometerAlt /> Dashboard
+            <FaTachometerAlt /> Dashboard
           </Link>
           <Link to="/admin/exhibits" className="flex items-center gap-2 hover:text-blue-400 transition opacity-50 cursor-not-allowed" title="Coming Soon">
             <FaImages /> Exhibits
