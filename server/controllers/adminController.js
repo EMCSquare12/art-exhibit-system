@@ -1,5 +1,5 @@
-import Order from '../models/orderModel';
-import Exhibit from '../models/exhibitModel';
+import Order from '../models/orderModel.js';
+import Exhibit from '../models/exhibitModel.js';
 
 const getDashboardStats = async (req, res) => {
   try {
