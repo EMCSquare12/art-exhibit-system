@@ -1,4 +1,4 @@
-import Exhibit from "../models/exhibitModel";
+import Exhibit from "../models/exhibitModel.js";
 
 const getExhibits = async (req, res) => {
     try{
@@ -24,7 +24,7 @@ const getExhibitById = async (req, res) => {
     }
 }
 
-const creatEExhibit = async (req, res) => {
+const createExhibit = async (req, res) => {
     try{
         const exhibit = await Exhibit.create(req.body);
         res.status(201).json(exhibit);
@@ -34,7 +34,7 @@ const creatEExhibit = async (req, res) => {
     }
 }
 
-const udpateExhibit = async (req, res) => {
+const updateExhibit = async (req, res) => {
     try{
         const exhibit = await Exhibit.findByIdAndUpdate(req.params.id)
         if(!exhibit){
@@ -67,10 +67,10 @@ const deleteExhibit = async (req, res) => {
     }
 }
 
-export default {
+export  {
     getExhibits,
     getExhibitById, 
-    creatEExhibit,
-    udpateExhibit,
+    createExhibit,
+    updateExhibit,
     deleteExhibit
 }
