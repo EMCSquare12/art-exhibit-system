@@ -1,4 +1,4 @@
-import {crypto} from 'crypto';
+import crypto from 'crypto';
 import Order from '../models/orderModel.js';
 import Exhibit from '../models/exhibitModel.js';
 
