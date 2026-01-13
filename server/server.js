@@ -18,6 +18,7 @@ res.status(200).json({ message: 'API is running smoothly' });
 });
 
 app.use('/api/exhibits', exhibitRoutes);
+app.use('/api/users', exhibitRoutes);
 
 
 const PORT = process.env.PORT || 5000;
