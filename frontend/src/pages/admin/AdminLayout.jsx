@@ -1,6 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import AdminNavbar from '../../components/AdminNavbar';
+import { USERS_URL } from '../../constant';
 
 const AdminLayout = () => {
   const { user, loading } = useAuth();
@@ -11,7 +12,7 @@ const AdminLayout = () => {
 
 
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={`${USERS_URL}/login`}replace />;
   }
 
   return (

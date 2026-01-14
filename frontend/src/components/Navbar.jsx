@@ -36,7 +36,7 @@ const Navbar = () => {
               <div className="flex items-center gap-4 pl-4 border-l border-gray-200">
                 <div className="flex items-center gap-2 text-gray-700">
                    <FaUserCircle className="text-lg text-gray-400"/>
-                   <span className="hidden md:inline">{user.name.split(' ')[0]}</span> {/* Show first name */}
+                   <span className="hidden md:inline">{user?.name?.split(' ')[0]}</span> 
                 </div>
                 <button
                   onClick={handleLogout}

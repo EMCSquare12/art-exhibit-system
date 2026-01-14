@@ -4,6 +4,7 @@ import axiosInstance from '../api/axiosConfig';
 import { useAuth } from '../context/AuthContext';
 import QRCode from 'react-qr-code';
 import { FaTicketAlt, FaCalendarDay, FaClock, FaMapMarkerAlt, FaHashtag, FaCheckCircle, FaHistory } from 'react-icons/fa';
+import { ORDERS_URL } from '../constant';
 
 const MyTickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -14,7 +15,7 @@ const MyTickets = () => {
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const res = await axiosInstance.get('/orders/myorders');
+        const res = await axiosInstance.get(`${ORDERS_URL}/my-orders`);
         setTickets(res.data);
       } catch (err) {
         console.error('Error fetching tickets:', err);
@@ -63,7 +64,7 @@ const MyTickets = () => {
       </header>
 
       <div className="space-y-8">
-        {tickets.map((ticket) => {
+        {tickets?.map((ticket) => {
            const isUsed = ticket.scannedAt !== null;
            const ticketStatusClass = isUsed
              ? "bg-gray-100 border-gray-200 text-gray-500"

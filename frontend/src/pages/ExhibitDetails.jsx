@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axiosInstance from '../api/axiosConfig';
 import { useAuth } from '../context/AuthContext';
+import { EXHIBITS_URL, USERS_URL } from '../constant';
 import { FaCalendarAlt, FaClock, FaMapMarkerAlt, FaInfoCircle, FaCheckCircle } from 'react-icons/fa';
 
 const ExhibitDetails = () => {
@@ -24,7 +25,7 @@ const ExhibitDetails = () => {
   useEffect(() => {
     const fetchExhibitDetails = async () => {
       try {
-        const res = await axiosInstance.get(`/exhibits/${id}`);
+        const res = await axiosInstance.get(`${EXHIBITS_URL}/${id}`);
         setExhibit(res.data);
         const startDate = new Date(res.data.startDate);
         const today = new Date();
@@ -53,7 +54,7 @@ const ExhibitDetails = () => {
     e.preventDefault();
 
     if (!user) {
-        navigate('/login');
+        navigate(`${USERS_URL}/login`);
         return;
     }
 
@@ -68,11 +69,11 @@ const ExhibitDetails = () => {
             quantity
         };
 
-        await axiosInstance.post('/orders', orderData);
+        await axiosInstance.post(`${ORDERS_URL}`, orderData);
 
         setBookingSuccess(true);
         setTimeout(() => {
-             navigate('/my-tickets');
+             navigate(`${TICKETS_URL}`);
         }, 2000);
 
     } catch (err) {

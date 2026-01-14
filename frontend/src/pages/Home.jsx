@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axiosConfig';
 import ExhibitCard from '../components/ExhibitCard';
 import { FaPalette } from 'react-icons/fa';
+import { EXHIBITS_URL } from '../constant';
 
 const Home = () => {
   const [exhibits, setExhibits] = useState([]);
@@ -11,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     const fetchExhibits = async () => {
       try {
-        const res = await axiosInstance.get('/exhibits');
+        const res = await axiosInstance.get(`${EXHIBITS_URL}`);
         setExhibits(res.data);
       } catch (err) {
         console.error('Error fetching exhibits:', err);
@@ -62,9 +63,9 @@ const Home = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* {exhibits?.map((exhibit) => (
+            {exhibits?.map((exhibit) => (
               <ExhibitCard key={exhibit._id} exhibit={exhibit} />
-            ))} */}
+            ))}
           </div>
         )}
       </section>
