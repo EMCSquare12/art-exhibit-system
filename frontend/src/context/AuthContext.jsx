@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import axiosInstance from '../api/axiosConfig';
+import { USERS_URL } from '../constant';
 
 const AuthContext = createContext();
 
@@ -14,7 +15,7 @@ export const AuthProvider = ({ children }) => {
         const loadUser = async () => {
             if (token) {
                 try {
-                    const res = await axiosInstance.get('/api/users/me');
+                    const res = await axiosInstance.get(`${USERS_URL}/me`);
                     setUser(res.data);
                 } catch (error) {
                     console.error("Token invalid or expired:", error);
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const register = async (userData) => {
-        const res = await axiosInstance.post('/api/users/register', userData);
+        const res = await axiosInstance.post(`${USERS_URL}/register`, userData);
         localStorage.setItem('ticketSiteToken', res.data.token);
         setToken(res.data.token);
         setUser(res.data);
@@ -37,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async (email, password) => {
-        const res = await axiosInstance.post('/api/users/login', { email, password });
+        const res = await axiosInstance.post(`${USERS_URL}/login`, { email, password });
         localStorage.setItem('ticketSiteToken', res.data.token);
         setToken(res.data.token);
         setUser(res.data);
