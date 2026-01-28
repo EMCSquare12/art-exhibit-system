@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axiosConfig';
 import ExhibitCard from '../components/ExhibitCard';
-import { FaPalette } from 'react-icons/fa';
 import { EXHIBITS_URL } from '../constant';
 
 const Home = () => {
@@ -26,43 +25,56 @@ const Home = () => {
   }, []); 
 
   if (isLoading) {
-    return <div className="text-center py-24 text-gray-500 animate-pulse">Loading current exhibits...</div>;
+    return (
+        <div className="min-h-[60vh] flex items-center justify-center">
+            <div className="text-stone-400 font-heading italic text-2xl animate-pulse">Curating artwork...</div>
+        </div>
+    );
   }
 
   if (error) {
     return (
-        <div className="text-center py-24">
-            <p className="text-red-600 mb-4">{error}</p>
-            <p className="text-gray-600">Please make sure your Node.js server is running on port 5000.</p>
+        <div className="text-center py-32">
+            <p className="text-red-800 font-serif text-2xl mb-4 italic">{error}</p>
+            <p className="text-stone-500 font-mono text-sm">Server status: Offline</p>
         </div>
     )
   }
 
   return (
-    <div>
-      <section className="mb-16 text-center py-20 bg-gradient-to-b from-blue-50 to-white rounded-3xl px-6">
-        <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-full mb-6 text-blue-600">
-            <FaPalette className="text-2xl" />
+    <div className="bg-stone-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-32 px-6 overflow-hidden">
+        <div className="max-w-5xl mx-auto text-center relative z-10">
+            <p className="text-orange-700 uppercase tracking-[0.2em] text-xs font-bold mb-6">
+                Established 2026
+            </p>
+            <h1 className="text-6xl md:text-8xl font-medium text-stone-900 mb-8 leading-[0.9] tracking-tight font-heading">
+              The Art of <br/> <span className="italic font-light text-stone-500">Perspective.</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-stone-600 max-w-2xl mx-auto font-light leading-relaxed">
+              Immerse yourself in a rotating selection of contemporary exhibitions. 
+              <br className="hidden md:block" /> Culture, curated for the modern mind.
+            </p>
         </div>
-        <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">
-          Curating the Future <br/> of Modern Art.
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          Explore our rotating selection of contemporary exhibitions and secure your spot today.
-        </p>
+        
+        {/* Abstract Background Element */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-orange-100/50 rounded-full blur-3xl -z-0 opacity-60 pointer-events-none"></div>
       </section>
 
-      <section id="exhibits">
-        <div className="flex items-center justify-between mb-10">
-          <h2 className="text-3xl font-bold text-gray-900">Current Exhibitions</h2>
+      {/* Exhibits Grid */}
+      <section id="exhibits" className="max-w-7xl mx-auto px-6 pb-24">
+        <div className="flex items-end justify-between mb-16 border-b border-stone-200 pb-4">
+          <h2 className="text-4xl font-normal text-stone-900 font-heading">Current Viewings</h2>
+          <span className="text-stone-400 font-mono text-xs hidden md:block">SCROLL DOWN ↓</span>
         </div>
 
         {exhibits.length === 0 ? (
-          <div className="text-center py-16 bg-gray-50 rounded-2xl">
-            <p className="text-gray-500 text-lg">No active exhibits at the moment. Please check back later!</p>
+          <div className="text-center py-24 bg-stone-100 rounded-lg border border-stone-200 border-dashed">
+            <p className="text-stone-500 font-serif italic text-2xl">The gallery is currently preparing new works.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
             {exhibits?.map((exhibit) => (
               <ExhibitCard key={exhibit._id} exhibit={exhibit} />
             ))}

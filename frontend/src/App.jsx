@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-// Public Components
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -17,10 +16,13 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen font-sans text-stone-900">
               <Navbar />
-              <main className="flex-grow container mx-auto max-w-6xl px-4 py-8"><Home /></main>
-              <footer className="bg-gray-100 text-center p-6 text-gray-500 text-sm">© ArtTix Public Footer</footer>
+              <main className="flex-grow w-full"><Home /></main>
+              <footer className="bg-stone-900 text-center p-12 text-stone-500 text-xs tracking-widest uppercase">
+                <div className="mb-4 text-stone-300 font-heading text-xl italic">ArtTix.</div>
+                © {new Date().getFullYear()} Art Exhibit System. All Rights Reserved.
+              </footer>
             </div>
         } />
          <Route path="/login" element={<><Navbar /><main className="container mx-auto px-4 py-8"><Login /></main></>} />

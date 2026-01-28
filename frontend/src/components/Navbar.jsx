@@ -12,39 +12,41 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
-      <div className="container mx-auto px-4 max-w-6xl h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-black text-blue-600 tracking-tight">ArtTix</span>
+    <nav className="bg-stone-50/80 backdrop-blur-md border-b border-stone-200 sticky top-0 z-50 transition-all">
+      <div className="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2 group">
+          {/* Artistic Logo Text */}
+          <span className="text-3xl font-bold font-heading text-stone-900 tracking-tighter group-hover:text-stone-600 transition-colors">
+            ArtTix<span className="text-orange-600">.</span>
+          </span>
         </Link>
 
-        <div className="flex items-center gap-6 font-medium text-sm">
-          <Link to="/" className="text-gray-600 hover:text-blue-600 transition">
-            Exhibits
+        <div className="flex items-center gap-8 font-medium text-sm tracking-wide">
+          <Link to="/" className="text-stone-600 hover:text-stone-900 transition-colors uppercase text-xs font-bold">
+            Exhibitions
           </Link>
 
           {user ? (
             <>
               <Link
                 to="/my-tickets"
-                className="flex items-center gap-1 text-gray-600 hover:text-blue-600 transition"
+                className="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-colors uppercase text-xs font-bold"
               >
                 <FaTicketAlt />
-                <span>My Tickets</span>
+                <span>Tickets</span>
               </Link>
 
-              <div className="flex items-center gap-4 pl-4 border-l border-gray-200">
-                <div className="flex items-center gap-2 text-gray-700">
-                   <FaUserCircle className="text-lg text-gray-400"/>
-                   <span className="hidden md:inline">{user?.name?.split(' ')[0]}</span> 
+              <div className="flex items-center gap-4 pl-6 border-l border-stone-300">
+                <div className="flex items-center gap-2 text-stone-800">
+                   <FaUserCircle className="text-xl text-stone-400"/>
+                   <span className="hidden md:inline font-heading italic">{user?.name?.split(' ')[0]}</span> 
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="flex items-center gap-1 text-gray-500 hover:text-red-600 transition"
+                  className="text-stone-400 hover:text-red-600 transition-colors"
                   title="Logout"
                 >
-                  <FaSignOutAlt />
-                  <span className="hidden md:inline">Logout</span>
+                  <FaSignOutAlt className="text-lg" />
                 </button>
               </div>
             </>
@@ -52,13 +54,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="text-gray-600 hover:text-blue-600 transition"
+                className="text-stone-600 hover:text-stone-900 transition uppercase text-xs font-bold"
               >
                 Log In
               </Link>
               <Link
                 to="/register"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition shadow-sm"
+                className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full transition shadow-md text-xs uppercase font-bold tracking-wider"
               >
                 Sign Up
               </Link>

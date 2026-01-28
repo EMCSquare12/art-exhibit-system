@@ -1,47 +1,51 @@
 import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
 
 const ExhibitCard = ({ exhibit }) => {
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    return new Date(dateString).toLocaleDateString('en-US', options);
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col h-full">
-      <div className="h-52 overflow-hidden relative bg-gray-100 group">
+    <div className="group flex flex-col h-full bg-transparent">
+      {/* Image Container with specific aspect ratio */}
+      <div className="relative aspect-[4/5] overflow-hidden rounded-md mb-6">
+         <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
          <img
            src={exhibit.imageUrl}
            alt={exhibit.title}
-           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-           onError={(e) => {e.target.src = 'https://via.placeholder.com/600x400?text=No+Image'}}
+           className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+           onError={(e) => {e.target.src = 'https://via.placeholder.com/600x800?text=ArtTix'}}
          />
-         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold shadow-sm text-gray-800">
-            {exhibit.price === 0 ? 'Free Entry' : `$${exhibit.price}`}
+         {/* Minimal Price Tag */}
+         <div className="absolute top-4 left-4 bg-white/95 backdrop-blur text-stone-900 px-3 py-1 text-xs uppercase font-bold tracking-wider z-20">
+            {exhibit.price === 0 ? 'Free' : `$${exhibit.price}`}
          </div>
       </div>
 
-      <div className="p-6 flex flex-col flex-grow">
-        <div className="mb-4">
-            <p className="text-sm font-semibold text-blue-600 mb-1">{exhibit.artist}</p>
-            <h3 className="text-xl font-bold text-gray-900 line-clamp-2 leading-tight">{exhibit.title}</h3>
+      {/* Content */}
+      <div className="flex flex-col flex-grow">
+        <div className="flex justify-between items-start mb-3">
+            <p className="text-xs font-bold text-orange-700 uppercase tracking-widest">{exhibit.artist}</p>
+            {/* Date as a subtle detail */}
+            <p className="text-xs text-stone-400 font-mono text-right">Until {new Date(exhibit.endDate).toLocaleDateString(undefined, {month:'short', day:'numeric'})}</p>
         </div>
+        
+        <h3 className="text-2xl font-medium text-stone-900 mb-3 font-heading leading-tight group-hover:text-orange-800 transition-colors">
+            {exhibit.title}
+        </h3>
 
-        <p className="text-gray-600 text-sm mb-6 line-clamp-3 flex-grow">
+        <p className="text-stone-500 text-sm leading-relaxed line-clamp-3 mb-6 font-light">
             {exhibit.description}
         </p>
 
-
-        <div className="border-t border-gray-100 pt-4 mt-auto">
-            <p className="text-sm text-gray-500 mb-4">
-              <span className="block text-xs uppercase tracking-wide text-gray-400 font-semibold">Open Until</span>
-               {formatDate(exhibit.endDate)}
-            </p>
-
+        <div className="mt-auto pt-4 border-t border-stone-200">
             <Link
               to={`/exhibit/${exhibit._id}`}
-              className="block w-full text-center bg-gray-900 text-white font-medium py-3 rounded-xl hover:bg-gray-800 transition-colors"
+              className="inline-flex items-center gap-2 text-stone-900 text-sm font-bold uppercase tracking-wider hover:gap-4 transition-all duration-300"
             >
-              View Details & Book
+              Reserve Ticket <FaArrowRight className="text-xs" />
             </Link>
         </div>
       </div>

@@ -49,7 +49,7 @@ const Dashboard = () => {
                   <td className="px-6 py-4 text-right font-medium">$50.00</td>
                 </tr>
              ))}
-          </tbody>
+          </tbody>  
         </table>
       </div>
     </div>
