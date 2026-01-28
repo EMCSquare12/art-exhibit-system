@@ -131,7 +131,7 @@ const ArtistDetails = () => {
 
       {/* List of Arts (Exhibits) */}
       <section className="max-w-7xl mx-auto px-6 -mt-10">
-        <div className="bg-white p-8 md:p-12 rounded-sm shadow-xl border border-stone-100">
+        <div className="bg-white p-8 md:p-12  shadow-xl border border-stone-100">
             <div className="flex items-end justify-between mb-10 border-b border-stone-100 pb-4">
                 <h2 className="text-3xl font-heading text-stone-900">Curated Collections</h2>
                 <span className="font-mono text-xs text-stone-400">{artistExhibits.length} WORKS ON DISPLAY</span>
