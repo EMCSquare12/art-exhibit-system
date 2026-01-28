@@ -10,7 +10,7 @@ const ExhibitCard = ({ exhibit }) => {
   return (
     <div className="group flex flex-col h-full bg-transparent">
       {/* Image Container with specific aspect ratio */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-md mb-6">
+      <div className="relative aspect-[4/5] overflow-hidden  mb-6">
          <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
          <img
            src={exhibit.imageUrl}

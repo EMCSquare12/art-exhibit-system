@@ -1,144 +1,130 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import axiosInstance from '../api/axiosConfig';
+import { USERS_URL } from '../constant';
+import { FaArrowRight } from 'react-icons/fa';
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const { name, email, password, confirmPassword } = formData;
-
-  const { register } = useAuth();
   const navigate = useNavigate();
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
     setIsLoading(true);
     try {
-      const userData = { name, email, password };
-      await register(userData);
-      navigate('/');
+      await axiosInstance.post(`${USERS_URL}`, formData);
+      navigate('/login');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed.');
+      setError(err.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-[80vh] mt-8">
-      <div className="w-full max-w-md bg-white p-8 border border-gray-200 rounded shadow-sm">
-        <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
+    <div className="min-h-[80vh] flex items-center justify-center bg-stone-50 p-4 md:p-8">
+      <div className="w-full max-w-6xl bg-white shadow-xl overflow-hidden flex flex-col md:flex-row-reverse min-h-[600px]">
+        
+        {/* Right (Form Side on Desktop) */}
+        <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-white z-10">
+          <div className="max-w-md mx-auto w-full">
+            <p className="text-xs font-bold text-stone-400 uppercase tracking-widest mb-4">Membership Application</p>
+            <h2 className="text-4xl md:text-5xl font-heading text-stone-900 mb-12">Become a Patron.</h2>
 
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 text-sm">
-            {error}
-          </div>
-        )}
+            {error && (
+              <div className="bg-red-50 border-l-2 border-red-800 text-red-900 p-4 mb-8 text-sm font-serif italic">
+                {error}
+              </div>
+            )}
 
-        <form onSubmit={onSubmit}>
-           <div className="mb-4">
-            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={name}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="John Doe"
-              required
-            />
-          </div>
+            <form onSubmit={handleSubmit} className="space-y-10">
+              
+              <div className="relative group">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder=" "
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="block w-full py-3 px-0 text-stone-900 bg-transparent border-b-2 border-stone-200 appearance-none focus:outline-none focus:ring-0 focus:border-stone-900 peer transition-colors font-mono text-sm"
+                  required
+                />
+                <label className="absolute text-sm text-stone-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-stone-900 peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider">
+                  Full Name
+                </label>
+              </div>
 
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+              <div className="relative group">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder=" "
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="block w-full py-3 px-0 text-stone-900 bg-transparent border-b-2 border-stone-200 appearance-none focus:outline-none focus:ring-0 focus:border-stone-900 peer transition-colors font-mono text-sm"
+                  required
+                />
+                <label className="absolute text-sm text-stone-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-stone-900 peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider">
+                  Email Address
+                </label>
+              </div>
 
-          <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="******"
-              required
-              minLength={6}
-            />
-          </div>
-           <div className="mb-6">
-            <label htmlFor="confirmPassword" className="block text-gray-700 text-sm font-bold mb-2">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={confirmPassword}
-              onChange={onChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="******"
-              required
-              minLength={6}
-            />
-          </div>
+              <div className="relative group">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder=" "
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full py-3 px-0 text-stone-900 bg-transparent border-b-2 border-stone-200 appearance-none focus:outline-none focus:ring-0 focus:border-stone-900 peer transition-colors font-mono text-sm"
+                  required
+                />
+                <label className="absolute text-sm text-stone-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-stone-900 peer-focus:font-bold peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 uppercase tracking-wider">
+                  Create Password
+                </label>
+              </div>
 
-          <div className="flex items-center justify-between">
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full transition duration-200 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              {isLoading ? 'Creating Account...' : 'Sign Up'}
-            </button>
-          </div>
-        </form>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`w-full bg-stone-900 text-white font-bold uppercase tracking-widest text-xs py-5 px-8 hover:bg-orange-800 transition-all duration-300 flex items-center justify-between group ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+              >
+                <span>{isLoading ? 'Processing...' : 'Complete Registration'}</span>
+                {!isLoading && <FaArrowRight className="transform group-hover:translate-x-1 transition-transform" />}
+              </button>
+            </form>
 
-        <p className="text-center text-gray-500 text-xs mt-4">
-          Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Log in here
-          </Link>
-        </p>
+            <div className="mt-12 text-center border-t border-stone-100 pt-8">
+              <p className="text-stone-500 text-sm font-light">
+                Already have a membership?{' '}
+                <Link to="/login" className="text-stone-900 font-bold underline decoration-stone-300 hover:decoration-orange-700 transition-all">
+                  Sign in here
+                </Link>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Left (Image Side on Desktop) - Reverse Order */}
+        <div className="w-full md:w-1/2 bg-stone-800 relative hidden md:block">
+           <img 
+             src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=2071&auto=format&fit=crop" 
+             alt="Modern Architecture" 
+             className="w-full h-full object-cover opacity-60 grayscale mix-blend-overlay"
+           />
+           <div className="absolute inset-0 bg-gradient-to-t from-stone-900/90 to-transparent"></div>
+           <div className="absolute bottom-12 left-12 text-stone-100 max-w-sm">
+              <h3 className="font-heading text-3xl mb-4">Curated Experiences.</h3>
+              <p className="font-light leading-relaxed text-sm opacity-90">Join our community of art enthusiasts and get exclusive access to exhibitions, artist talks, and private viewings.</p>
+           </div>
+        </div>
+
       </div>
     </div>
   );
