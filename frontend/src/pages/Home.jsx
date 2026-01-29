@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axiosInstance from '../api/axiosConfig';
 import ExhibitCard from '../components/ExhibitCard';
 import { EXHIBITS_URL } from '../constant';
+import PageLoader from '../components/PageLoader';
+import ErrorMessage from '../components/ErrorMessage';
 
 const Home = () => {
   const [exhibits, setExhibits] = useState([]);
@@ -24,21 +26,12 @@ const Home = () => {
     fetchExhibits();
   }, []); 
 
-  if (isLoading) {
-    return (
-        <div className="min-h-[60vh] flex items-center justify-center">
-            <div className="text-stone-400 font-heading italic text-2xl animate-pulse">Curating artwork...</div>
-        </div>
-    );
+ if (isLoading) {
+    return <PageLoader message="Curating artwork..." />;
   }
 
   if (error) {
-    return (
-        <div className="text-center py-32">
-            <p className="text-red-800 font-serif text-2xl mb-4 italic">{error}</p>
-            <p className="text-stone-500 font-mono text-sm">Server status: Offline</p>
-        </div>
-    )
+    return <ErrorMessage message={error} subtitle="Server status: Offline" />;
   }
 
   return (

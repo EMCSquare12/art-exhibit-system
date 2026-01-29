@@ -10,7 +10,7 @@ const ExhibitCard = ({ exhibit }) => {
   return (
     <div className="group flex flex-col h-full bg-transparent">
       {/* Image Container */}
-      <div className="relative aspect-[4/5] overflow-hidden  mb-6 bg-gray-100">
+      <div className="relative aspect-4/5 overflow-hidden  mb-6 bg-gray-100">
          <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors z-10 duration-500"></div>
          <img
            src={exhibit.imageUrl}
@@ -24,7 +24,7 @@ const ExhibitCard = ({ exhibit }) => {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-col grow">
         <div className="flex justify-between items-start mb-3">
             {/* LINK TO ARTIST SCREEN */}
             <Link 

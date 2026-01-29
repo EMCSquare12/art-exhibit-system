@@ -19,6 +19,7 @@ const Navbar = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
   const handleScrollToExhibits = (e) => {
     if (location.pathname === '/') {
       e.preventDefault();
@@ -29,39 +30,65 @@ const Navbar = () => {
     }
   };
 
+  // Reusable Artistic Link Component
+  const NavLink = ({ to, children, onClick }) => (
+    <Link 
+        to={to} 
+        onClick={onClick}
+        className="relative group font-heading text-lg font-medium text-stone-600 hover:text-stone-900 transition-colors duration-300"
+    >
+        <span>{children}</span>
+        {/* Artistic Underline Effect */}
+        <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-orange-700 transition-all duration-300 ease-out group-hover:w-full"></span>
+    </Link>
+  );
+
   return (
     <nav className="bg-stone-50/80 backdrop-blur-md border-b border-stone-200 sticky top-0 z-50 transition-all">
-      <div className="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
-        <Link to="/" onClick={handleScrollToTop} className="flex items-center gap-2 group">
-          {/* Artistic Logo Text */}
+      <div className="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between relative">
+        
+        {/* LEFT: Logo */}
+        <Link 
+          to="/" 
+          onClick={handleScrollToTop}
+          className="flex items-center gap-2 group z-20"
+        >
           <span className="text-3xl font-bold font-heading text-stone-900 tracking-tighter group-hover:text-stone-600 transition-colors">
             ArtTix<span className="text-orange-600">.</span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-8 font-medium text-sm tracking-wide">
-          <Link 
-            to="/#exhibits" 
-            onClick={handleScrollToExhibits}
-            className="text-stone-600 hover:text-stone-900 transition-colors uppercase text-xs font-bold"
-          >
+        {/* CENTER: Navigation Links (Absolute Centered) */}
+        <div className="hidden md:flex items-center gap-12 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <NavLink to="/#exhibits" onClick={handleScrollToExhibits}>
             Exhibitions
-          </Link>
+          </NavLink>
 
+          <NavLink to="/gallery">
+            Gallery
+          </NavLink>
+
+          <NavLink to="/artists">
+            Artists
+          </NavLink>
+        </div>
+
+        {/* RIGHT: User Actions */}
+        <div className="flex items-center gap-6 z-20">
           {user ? (
             <>
               <Link
                 to="/my-tickets"
-                className="flex items-center gap-2 text-stone-600 hover:text-stone-900 transition-colors uppercase text-xs font-bold"
+                className="flex items-center gap-2 font-heading text-lg font-medium text-stone-600 hover:text-stone-900 transition-colors"
               >
-                <FaTicketAlt />
-                <span>Tickets</span>
+                <FaTicketAlt className="text-sm" />
+                <span className="hidden sm:inline">Tickets</span>
               </Link>
 
               <div className="flex items-center gap-4 pl-6 border-l border-stone-300">
                 <div className="flex items-center gap-2 text-stone-800">
                    <FaUserCircle className="text-xl text-stone-400"/>
-                   <span className="hidden md:inline font-heading italic">{user?.name?.split(' ')[0]}</span> 
+                   <span className="hidden md:inline font-heading text-lg font-medium">{user?.name?.split(' ')[0]}</span> 
                 </div>
                 <button
                   onClick={handleLogout}
@@ -76,13 +103,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="text-stone-600 hover:text-stone-900 transition uppercase text-xs font-bold"
+                className="font-heading text-lg font-medium text-stone-600 hover:text-stone-900 transition-colors"
               >
                 Log In
               </Link>
               <Link
                 to="/register"
-                className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full transition shadow-md text-xs uppercase font-bold tracking-wider"
+                className="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2.5 rounded-full transition shadow-md text-xs uppercase font-bold tracking-widest"
               >
                 Sign Up
               </Link>
