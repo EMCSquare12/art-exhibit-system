@@ -42,7 +42,7 @@ const Home = () => {
   }
 
   return (
-    <div className="bg-stone-50 min-h-screen">
+    <div id='#home' className="bg-stone-50 min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-20 pb-32 px-6 overflow-hidden">
         <div className="max-w-5xl mx-auto text-center relative z-10">
