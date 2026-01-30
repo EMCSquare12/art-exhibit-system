@@ -20,10 +20,11 @@ const Navbar = () => {
     }
   };
 
-  const handleScrollToExhibits = (e) => {
+  // Generic handler for scrolling to a section
+  const handleScrollToSection = (e, sectionId) => {
     if (location.pathname === '/') {
       e.preventDefault();
-      const element = document.getElementById('exhibits');
+      const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
@@ -60,16 +61,23 @@ const Navbar = () => {
 
         {/* CENTER: Navigation Links (Absolute Centered) */}
         <div className="hidden md:flex items-center gap-12 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <NavLink to="/#exhibits" onClick={handleScrollToExhibits}>
+          <NavLink 
+            to="/#exhibits" 
+            onClick={(e) => handleScrollToSection(e, 'exhibits')}
+          >
             Exhibitions
           </NavLink>
-
-          <NavLink to="/gallery">
-            Gallery
-          </NavLink>
-
-          <NavLink to="/artists">
+          <NavLink 
+            to="/#artists" 
+            onClick={(e) => handleScrollToSection(e, 'artists')}
+          >
             Artists
+          </NavLink>
+           <NavLink 
+            to="/#gallery" 
+            onClick={(e) => handleScrollToSection(e, 'gallery')}
+          >
+            Gallery
           </NavLink>
         </div>
 

@@ -57,11 +57,11 @@ const Home = () => {
         </div>
         
         {/* Abstract Background Element */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-orange-100/50 rounded-full blur-3xl -z-0 opacity-60 pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-200 bg-orange-100/50 rounded-full blur-3xl z-0 opacity-60 pointer-events-none"></div>
       </section>
 
       {/* Exhibits Grid */}
-      <section id="exhibits" className="max-w-7xl mx-auto px-6 pb-24">
+      <section id="exhibits" className="max-w-7xl mx-auto px-6 py-24">
         <div className="flex items-end justify-between mb-16 border-b border-stone-200 pb-4">
           <h2 className="text-4xl font-normal text-stone-900 font-heading">Current Viewings</h2>
           <span className="text-stone-400 font-mono text-xs hidden md:block">SCROLL DOWN ↓</span>
@@ -116,58 +116,64 @@ const Home = () => {
       </section>
 
       {/* The Gallery / Info Section */}
-      <section id="gallery" className="py-24 px-6 bg-orange-50/50">
-          <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                  
-                  {/* Text Content */}
-                  <div>
-                      <p className="text-stone-400 uppercase tracking-[0.2em] text-xs font-bold mb-6">The Space</p>
-                      <h2 className="text-5xl font-heading text-stone-900 mb-8 leading-none">
-                          Architecture <br/> for the Soul.
-                      </h2>
-                      <div className="space-y-6 text-stone-600 font-serif text-lg leading-relaxed">
-                          <p>
-                              Nestled in the heart of the cultural district, ArtTix Gallery serves as a sanctuary for modern expression. 
-                              Our space is designed not just to house art, but to amplify its voice.
-                          </p>
-                          <p>
-                              With over 12,000 square feet of exhibition space, light-flooded atriums, and acoustic isolation chambers, 
-                              every exhibit is an immersive journey.
-                          </p>
-                      </div>
+<section id="gallery" className="py-24 px-6 bg-orange-50/50">
+    <div className="max-w-7xl mx-auto">
+        {/* Added Header with Button matching Artist section style */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6 border-b border-stone-200 pb-8">
+            <div>
+                <p className="text-orange-700 uppercase tracking-[0.2em] text-xs font-bold mb-4">The Space</p>
+                <h2 className="text-5xl font-heading text-stone-900 leading-tight">Architecture <br/> for the Soul.</h2>
+            </div>
+            <Link to="/gallery" className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-stone-900 hover:gap-6 transition-all duration-300">
+                Explore Full Gallery <FaArrowRight className="text-orange-600" />
+            </Link>
+        </div>
 
-                      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 pt-10 border-t border-stone-200">
-                          <div>
-                              <div className="flex items-center gap-2 text-stone-900 font-bold uppercase text-xs tracking-widest mb-2">
-                                  <FaClock className="text-orange-600"/> Opening Hours
-                              </div>
-                              <p className="text-sm text-stone-600 font-mono">Daily: 10:00 AM — 08:00 PM</p>
-                          </div>
-                          <div>
-                               <div className="flex items-center gap-2 text-stone-900 font-bold uppercase text-xs tracking-widest mb-2">
-                                  <FaMapMarkerAlt className="text-orange-600"/> Location
-                              </div>
-                              <p className="text-sm text-stone-600 font-mono">123 Innovation Dr, Creative City</p>
-                          </div>
-                      </div>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Text Content */}
+            <div>
+                <div className="space-y-6 text-stone-600 font-serif text-lg leading-relaxed">
+                    <p>
+                        Nestled in the heart of the cultural district, ArtTix Gallery serves as a sanctuary for modern expression. 
+                        Our space is designed not just to house art, but to amplify its voice.
+                    </p>
+                    <p>
+                        With over 12,000 square feet of exhibition space, light-flooded atriums, and acoustic isolation chambers, 
+                        every exhibit is an immersive journey.
+                    </p>
+                </div>
 
-                  {/* Image */}
-                  <div className="relative h-[600px] w-full rounded-sm overflow-hidden group shadow-2xl">
-                      <img 
-                        src="https://images.unsplash.com/photo-1577724618750-936688cb62cc?q=80&w=2070&auto=format&fit=crop" 
-                        alt="Gallery Interior" 
-                        className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
-                      />
-                      <div className="absolute bottom-0 left-0 bg-white p-6 max-w-xs shadow-lg">
-                          <p className="font-heading text-xl italic text-stone-900">"A masterpiece of minimalism."</p>
-                          <p className="text-xs uppercase tracking-widest text-stone-400 mt-2">— Architectural Digest</p>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
+                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 pt-10 border-t border-stone-200">
+                    <div>
+                        <div className="flex items-center gap-2 text-stone-900 font-bold uppercase text-xs tracking-widest mb-2">
+                            <FaClock className="text-orange-600"/> Opening Hours
+                        </div>
+                        <p className="text-sm text-stone-600 font-mono">Daily: 10:00 AM — 08:00 PM</p>
+                    </div>
+                    <div>
+                        <div className="flex items-center gap-2 text-stone-900 font-bold uppercase text-xs tracking-widest mb-2">
+                            <FaMapMarkerAlt className="text-orange-600"/> Location
+                        </div>
+                        <p className="text-sm text-stone-600 font-mono">123 Innovation Dr, Creative City</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Image */}
+            <div className="relative h-[600px] w-full rounded-sm overflow-hidden group shadow-2xl">
+                <img 
+                    src="https://images.unsplash.com/photo-1577724618750-936688cb62cc?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Gallery Interior" 
+                    className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+                />
+                <div className="absolute bottom-0 left-0 bg-white p-6 max-w-xs shadow-lg">
+                    <p className="font-heading text-xl italic text-stone-900">"A masterpiece of minimalism."</p>
+                    <p className="text-xs uppercase tracking-widest text-stone-400 mt-2">— Architectural Digest</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     </div>
   );

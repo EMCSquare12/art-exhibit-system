@@ -9,6 +9,8 @@ import MyTickets from './pages/MyTickets';
 
 import AdminLayout from './pages/admin/AdminLayout';
 import Dashboard from './pages/admin/Dashboard';
+import Gallery from './pages/Gallery';
+import Artists from './pages/Artists';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
               </footer>
             </div>
         } />
+        <Route path="/gallery" element={<><Navbar /><main className="grow w-full"><Gallery /></main></>} />
+        <Route path="/artists" element={<><Navbar /><main className="grow w-full"><Artists /></main></>} />
          <Route path="/login" element={<><Navbar /><main className="container mx-auto px-4 py-8"><Login /></main></>} />
          <Route path="/register" element={<><Navbar /><main className="container mx-auto px-4 py-8"><Register /></main></>} />
          <Route path="/exhibit/:id" element={<><Navbar /><main className="container mx-auto px-4 py-8"><ExhibitDetails /></main></>} />
